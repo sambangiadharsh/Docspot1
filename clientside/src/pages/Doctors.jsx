@@ -48,12 +48,20 @@ const Doctors = () => {
           `}
         >
           {[
-            "General physician",
-            "Gynecologist",
-            "Dermatologist",
-            "Pediatricians",
-            "Neurologist",
-            "Gastroenterologist",
+            "Cardiologist",
+"Orthopedic Surgeon",
+"ENT Specialist",
+"Ophthalmologist",
+"Psychiatrist",
+"Endocrinologist",
+"Nephrologist",
+"Urologist",
+"Oncologist",
+"Rheumatologist",
+"Pulmonologist",
+"Radiologist",
+"General Surgeon",
+"Plastic Surgeon",
           ].map((item, i) => (
             <p
               key={i}

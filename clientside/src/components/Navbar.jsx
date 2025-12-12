@@ -62,7 +62,7 @@ const Navbar = () => {
 
         {/* ⭐ Admin Link */}
         <a
-          href="https://docspot-admin.onrender.com"
+          href="https://docspot1.onrender.com"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-primary transition"
