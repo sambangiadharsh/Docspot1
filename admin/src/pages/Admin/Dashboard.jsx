@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { assets } from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
@@ -9,11 +9,27 @@ const Dashboard = () => {
 
   const { slotDateFormat } = useContext(AppContext);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    if (aToken) {
-      getDashData();
-    }
+    const load = async () => {
+      if (aToken) {
+        setLoading(true);
+        await getDashData();
+        setLoading(false);
+      }
+    };
+    load();
   }, [aToken]);
+
+  // 🔄 Loading Spinner
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[70vh]">
+        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     dashData && (
@@ -63,10 +79,11 @@ const Dashboard = () => {
                 key={index}
               >
                 <img
-                  className="rounded-full w-10"
+                  className="rounded-full w-10 h-10 object-cover object-top"
                   src={item.docData.image}
                   alt=""
                 />
+
                 <div className="flex-1 text-sm">
                   <p className="text-gray-800 font-medium">
                     {item.docData.name}
@@ -75,12 +92,11 @@ const Dashboard = () => {
                     {slotDateFormat(item.slotDate)}
                   </p>
                 </div>
+
                 {item.cancelled ? (
                   <p className="text-red-400 text-xs font-medium">Cancelled</p>
                 ) : item.isCompleted ? (
-                  <p className="text-green-500 text-xs font-medium">
-                    Completed
-                  </p>
+                  <p className="text-green-500 text-xs font-medium">Completed</p>
                 ) : (
                   <img
                     onClick={() => cancelAppointment(item._id)}
