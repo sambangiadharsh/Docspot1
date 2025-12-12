@@ -9,27 +9,9 @@ const Dashboard = () => {
 
   const { slotDateFormat } = useContext(AppContext);
 
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const load = async () => {
-      if (aToken) {
-        setLoading(true);
-        await getDashData();
-        setLoading(false);
-      }
-    };
-    load();
-  }, [aToken]);
 
-  // 🔄 Loading Spinner
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-[70vh]">
-        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
+ 
 
   return (
     dashData && (
