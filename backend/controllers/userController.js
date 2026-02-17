@@ -200,6 +200,10 @@ const cancelAppointment = async (req, res) => {
     if (appointmentData.userId !== userId) {
       return res.json({ success: false, message: "Unauthorized action" });
     }
+    
+    if (appointmentData.cancelled) {
+      return res.json({ success: false, message: "Already cancelled" });
+    }
 
     //  Step 1: If appointment was paid → issue refund
     if (appointmentData.payment === true && appointmentData.paymentIntent) {
